@@ -7,7 +7,7 @@ module Sources
     end
 
     def fetch(keys)
-      records = @model.where(user_id: keys).order(:purchase_on).group_by(&:user_id)
+      records = @model.where(user_id: keys).order({purchase_on: :desc}).group_by(&:user_id)
       keys.map { |key| records[key] || [] }
     end
   end

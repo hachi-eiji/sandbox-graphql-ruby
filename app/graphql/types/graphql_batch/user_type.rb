@@ -8,7 +8,7 @@ module Types
       field :purchase_books, [Types::GraphqlBatch::BookType]
 
       def purchase_books
-        Loaders::AssociationLoader.for(User, :purchase_books).load(object)
+        Loaders::AssociationLoader.for(User, :purchase_books, { created_at: :desc }).load(object)
       end
     end
   end
