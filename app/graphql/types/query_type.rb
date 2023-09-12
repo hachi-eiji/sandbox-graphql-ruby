@@ -6,5 +6,6 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
+    field :books1, resolver: Resolvers::GraphqlRuby::BooksResolver
   end
 end
