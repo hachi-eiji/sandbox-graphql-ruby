@@ -32,5 +32,5 @@ curl -s "http://localhost:3000/graphql" \
 
 ```shell
 curl -s "http://localhost:3000/graphql" \
---json '{"query": "query BooksQuery{ books2 { id name purchaseOn user { id name purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
+--json '{"query": "query BooksQuery{ books2 { id name purchaseOn user { id name hasBook purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
 ```

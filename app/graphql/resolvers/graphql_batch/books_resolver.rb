@@ -6,7 +6,7 @@ module Resolvers
       type [Types::GraphqlBatch::BookType], null: true
 
       def resolve
-        Book.limit(5)
+        Book.where(user_id: [1, 2, 3, 21])
       end
     end
   end
