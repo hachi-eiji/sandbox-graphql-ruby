@@ -13,7 +13,8 @@ module Types
       end
 
       def has_book
-        Loaders::ExistsLoader.for(Book, :user_id).load(object.id)
+        today = Time.zone.today.beginning_of_day
+        Loaders::ExistsLoader.for(Book, :user_id, { created_at: today.. }).load(object.id)
       end
     end
   end
