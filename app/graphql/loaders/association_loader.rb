@@ -8,11 +8,13 @@ module Loaders
       nil
     end
 
-    def initialize(model, association_name, orders = nil)
+    def initialize(model, association_name, where: nil, orders: nil, scope_names: nil)
       super()
       @model = model
       @association_name = association_name
+      @where = where
       @orders = orders
+      @scope_names = scope_names
       validate
     end
 
@@ -41,9 +43,10 @@ module Loaders
     end
 
     def preload_association(records)
-      # 参考部分とここがちがう
-      order = @orders.present? ? @model.reflect_on_association(@association_name).klass.order(@orders) : nil
-      ::ActiveRecord::Associations::Preloader.new(records: records, associations: @association_name, scope: order).call
+      ::ActiveRecord::Associations::Preloader.new(
+        records: records,
+        associations: @association_name,
+        scope: create_reflect_association).call
     end
 
     def read_association(record)
@@ -52,6 +55,22 @@ module Loaders
 
     def association_loaded?(record)
       record.association(@association_name).loaded?
+    end
+
+    # 参考部分とここがちがう
+    def create_reflect_association
+      reflect_association = nil
+      if @where.present? || @orders.present? || @scope_names.present?
+        reflect_association = @model.reflect_on_association(@association_name).klass
+
+        reflect_association = reflect_association.where(@where) if @where.present?
+        reflect_association = reflect_association.order(@orders) if @orders.present?
+
+        [@scope_names].flatten.compact.each do |scope|
+          reflect_association = reflect_association.send(scope)
+        end
+      end
+      reflect_association
     end
   end
 end

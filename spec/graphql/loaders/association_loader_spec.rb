@@ -31,7 +31,7 @@ RSpec.describe Loaders::AssociationLoader do
     context "argument sort" do
       it 'should sorted by purchase_on asc' do
         result = GraphQL::Batch.batch do
-          Loaders::AssociationLoader.for(User, :books, { purchase_on: :asc }).load(has_book_user)
+          Loaders::AssociationLoader.for(User, :books, orders: { purchase_on: :asc }).load(has_book_user)
         end
 
         expect(result).to eq([book2, book1])
@@ -42,6 +42,44 @@ RSpec.describe Loaders::AssociationLoader do
       it 'should sorted by purchase_on asc' do
         result = GraphQL::Batch.batch do
           Loaders::AssociationLoader.for(User, :purchase_books).load(has_book_user)
+        end
+
+        expect(result).to eq([book2, book1])
+      end
+    end
+
+    context "add condition" do
+      it "should filter" do
+        result = GraphQL::Batch.batch do
+          Loaders::AssociationLoader.for(User, :purchase_books, where: { name: "book2" }).load(has_book_user)
+        end
+
+        expect(result).to eq([book2])
+      end
+    end
+
+    context "add other scope" do
+      it "should filter" do
+        result = GraphQL::Batch.batch do
+          Loaders::AssociationLoader.for(User, :books, scope_names: :old_books).load(has_book_user)
+        end
+
+        expect(result).to eq([book1, book2])
+      end
+    end
+
+    context "multi scope" do
+      it "should filter" do
+        result = GraphQL::Batch.batch do
+          Loaders::AssociationLoader.for(User, :books, scope_names: [:old_books, :order_purchase_on]).load(has_book_user)
+        end
+
+        expect(result).to eq([book2, book1])
+      end
+
+      it "should filter" do
+        result = GraphQL::Batch.batch do
+          Loaders::AssociationLoader.for(User, :purchase_books, scope_names: [:old_books, :order_id]).load(has_book_user)
         end
 
         expect(result).to eq([book2, book1])
