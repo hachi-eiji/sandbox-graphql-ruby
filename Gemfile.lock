@@ -66,6 +66,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    amazing_print (1.5.0)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -144,6 +145,10 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails_semantic_logger (4.12.0)
+      rack
+      railties (>= 5.1)
+      semantic_logger (~> 4.13)
     railties (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -173,6 +178,8 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    semantic_logger (4.13.0)
+      concurrent-ruby (~> 1.0)
     sqlite3 (1.6.5-arm64-darwin)
     stringio (3.0.8)
     thor (1.2.2)
@@ -188,12 +195,14 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  amazing_print
   bootsnap
   debug
   graphql (~> 2.1)
   graphql-batch (~> 0.5.3)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  rails_semantic_logger
   rspec-rails
   sqlite3 (~> 1.4)
   tzinfo-data

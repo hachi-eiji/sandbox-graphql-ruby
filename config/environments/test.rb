@@ -28,7 +28,13 @@ Rails.application.configure do
   config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates.
+  config.rails_semantic_logger.format = :color
   config.action_dispatch.show_exceptions = false
+  config.rails_semantic_logger.semantic = false
+  config.rails_semantic_logger.started = true
+  config.rails_semantic_logger.processing = true
+  config.rails_semantic_logger.rendered = true
+  config.colorize_logging = true
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false

@@ -39,6 +39,9 @@ gem "bootsnap", require: false
 gem 'graphql', '~> 2.1'
 gem 'graphql-batch', '~> 0.5.3'
 
+gem "amazing_print"
+gem "rails_semantic_logger"
+
 group :development, :test do
   gem "rspec-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
