@@ -9,7 +9,7 @@ module Types
       field :has_book, Boolean
 
       def purchase_books
-        Loaders::AssociationLoader.for(User, :purchase_books, where: { created_at: :desc }).load(object)
+        Loaders::AssociationLoader.for(User, :purchase_books, orders: { created_at: :desc }).load(object)
       end
 
       def has_book
