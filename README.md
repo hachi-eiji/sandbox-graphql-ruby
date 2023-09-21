@@ -18,7 +18,7 @@ curl -s "http://localhost:3000/graphql" \
 get book and user
 ```shell
 curl -s "http://localhost:3000/graphql" \
---json '{"query": "query BooksQuery{ books0 { id name purchaseOn user { id name purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
+--json '{"query": "query BooksQuery{ books0 { id name purchaseOn user { id name hasBook purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
 ```
 
 ### Preload Model
@@ -32,14 +32,14 @@ curl -s "http://localhost:3000/graphql" \
 get book and user
 ```shell
 curl -s "http://localhost:3000/graphql" \
---json '{"query": "query BooksQuery{ books3 { id name purchaseOn user { id name purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
+--json '{"query": "query BooksQuery{ books3 { id name purchaseOn user { id name hasBook purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
 ```
 
 ### Graphql Ruby
 
 ```shell
 curl -s "http://localhost:3000/graphql" \
---json '{"query": "query BooksQuery{ books1 { id name purchaseOn user { id name purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
+--json '{"query": "query BooksQuery{ books1 { id name purchaseOn user { id name hasBook purchaseBooks{ id name purchaseOn } }}}", "operationName": "BooksQuery"}'
 ```
 
 ### Graphql Batch
