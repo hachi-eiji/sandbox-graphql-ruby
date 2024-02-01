@@ -8,4 +8,8 @@ class User < ApplicationRecord
     today = Time.zone.today.beginning_of_day
     books.where({ created_at: today.. }).present?
   end
+
+  def has_name?
+    name.present?
+  end
 end
